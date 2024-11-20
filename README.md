@@ -13,6 +13,8 @@ By default, this script creates full sets for each region - for example, (World)
 
 - Not compatible with Linux or macOS currently.
 
+In the future, I would like to create a GUI wrapper for this script, even if it's just so I can learn how.
+
 # Why's this?
 
 In order to simplify compatibility with various frontends, to satisfy my own preferences, and possibly the preferences of others. A few use-cases can be found below:
