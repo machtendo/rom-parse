@@ -18,6 +18,52 @@ In the future, I would like to create a GUI wrapper for this script, even if it'
 This project was originally released on LaunchBox Forums here: 
 https://forums.launchbox-app.com/files/file/4268-machtendo-no-intro-rom-parse/
 
+<details>
+<summary>Testing</summary>
+
+This script has been tested with the following platforms:
+
+- Atari - 2600
+- Atari - 5200
+- Atari - 7800
+- Atari - Jaguar
+- Atari - Lynx
+- Bandai - WonderSwan
+- Bandai - WonderSwan Color
+- GCE - Vectrex
+- NEC - PC Engine - TurboGrafx-16
+- NEC - PC Engine CD
+- NEC - PC Engine SuperGrafx
+- Nintendo - 3DS
+- Nintendo - DS
+- Nintendo - Family Computer Disk System
+- Nintendo - Game and Watch
+- Nintendo - Game Boy
+- Nintendo - Game Boy Advance
+- Nintendo - Game Boy Color
+- Nintendo - GameCube
+- Nintendo - Nintendo 64
+- Nintendo - Nintendo 64DD
+- Nintendo - Nintendo Entertainment System
+- Nintendo - Satellaview
+- Nintendo - Super Nintendo Entertainment System
+- Nintendo - Virtual Boy
+- Nintendo - Wii
+- Sega - 32X
+- Sega - Dreamcast
+- Sega - Game Gear
+- Sega - Master System - Mark III
+- Sega - Mega Drive - Genesis
+- Sega - Saturn
+- Sega - SG-1000
+- SNK - NeoGeo Pocket
+- SNK - NeoGeo Pocket Color
+- Sony - PlayStation
+- Sony - PlayStation 2
+- Sony - PS Vita
+- Sony - PSP
+</details>
+
 # Why's this?
 
 In order to simplify compatibility with various frontends, to satisfy my own preferences, and possibly the preferences of others. A few use-cases can be found below:
@@ -39,8 +85,11 @@ intuitive.
 
 Simply copy this batch file into the folder containing your roms, and double click to run it. 
 
-That's it!
+If you happen to receive an error along the lines of "Running Scripts is Disabled on this System" you can open the folder in Terminal or PowerShell and run the script with the following command:
 
+```
+powershell -ExecutionPolicy Bypass -File .\rom-parse.ps1
+```
 
 # Logic & Structure
 
@@ -90,48 +139,5 @@ Keep in mind, this script is only intended for use with romsets following the No
 
 - By default, no ROM files are deleted by this script - I'm only sorting and organizing.
 
-- I am not responsible for any undesirable effects or outcomes running this script may have.
-
-# Testing
-
-This script has been tested with the following platforms:
-
-- Atari - 2600
-- Atari - 5200
-- Atari - 7800
-- Atari - Jaguar
-- Atari - Lynx
-- Bandai - WonderSwan
-- Bandai - WonderSwan Color
-- GCE - Vectrex
-- NEC - PC Engine - TurboGrafx-16
-- NEC - PC Engine CD
-- NEC - PC Engine SuperGrafx
-- Nintendo - 3DS
-- Nintendo - DS
-- Nintendo - Family Computer Disk System
-- Nintendo - Game and Watch
-- Nintendo - Game Boy
-- Nintendo - Game Boy Advance
-- Nintendo - Game Boy Color
-- Nintendo - GameCube
-- Nintendo - Nintendo 64
-- Nintendo - Nintendo 64DD
-- Nintendo - Nintendo Entertainment System
-- Nintendo - Satellaview
-- Nintendo - Super Nintendo Entertainment System
-- Nintendo - Virtual Boy
-- Nintendo - Wii
-- Sega - 32X
-- Sega - Dreamcast
-- Sega - Game Gear
-- Sega - Master System - Mark III
-- Sega - Mega Drive - Genesis
-- Sega - Saturn
-- Sega - SG-1000
-- SNK - NeoGeo Pocket
-- SNK - NeoGeo Pocket Color
-- Sony - PlayStation
-- Sony - PlayStation 2
-- Sony - PS Vita
-- Sony - PSP
+# Disclaimer
+I am not responsible for any undesirable effects or outcomes running this script may have.
