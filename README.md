@@ -30,7 +30,7 @@ intuitive.
 
 - Trimming
 
-  Once the script is run, one could simply delete entire regions, remove all the various Test Programs, trim BIOS files, delete Demo or Sample roms, Prototypes, and easily create a custom set that suits their individual tastes.
+  Once the script is run, one could simply delete entire regions, remove all the various Test Programs, trim BIOS files, delete Demo or Sample roms, Prototypes, and easily create a custom set that suits their individual tastes. This script can be used to create your own 1G1R-set, though this has not been tested on all platforms.
 
 # Instructions
 
