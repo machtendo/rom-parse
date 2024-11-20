@@ -17,18 +17,18 @@ By default, this script creates full sets for each region - for example, (World)
 
 In order to simplify compatibility with various frontends, to satisfy my own preferences, and possibly the preferences of others. A few use-cases can be found below:
 
-*LaunchBox
+- LaunchBox
 
-When using LaunchBox, playlists can be created by using the "Application/ROM Path" parameter - the filepaths/folder structure created by this script will allow you to be as granular as you would like.
+  When using LaunchBox, playlists can be created by using the "Application/ROM Path" parameter - the filepaths/folder structure created by this script will allow you to be as granular as you would like.
 
-EmulationStation-DE
+- EmulationStation-DE
 
-When using EmulationStation-DE, you're actually just browsing your file/folder structure - the filepaths/folder structure created by this script are meant to be descriptive and (hopefully) 
+  When using EmulationStation-DE, you're actually just browsing your file/folder structure - the filepaths/folder structure created by this script are meant to be descriptive and (hopefully) 
 intuitive.
 
-Trimming
+- Trimming
 
-Once the script is run, one could simply delete entire regions, remove all the various Test Programs, trim BIOS files, delete Demo or Sample roms, Prototypes, and easily create a custom set that suits their individual tastes.
+  Once the script is run, one could simply delete entire regions, remove all the various Test Programs, trim BIOS files, delete Demo or Sample roms, Prototypes, and easily create a custom set that suits their individual tastes.
 
 # Instructions
 
