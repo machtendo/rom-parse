@@ -17,7 +17,7 @@ By default, this script creates full sets for each region - for example, (World)
 
 In order to simplify compatibility with various frontends, to satisfy my own preferences, and possibly the preferences of others. A few use-cases can be found below:
 
-LaunchBox
+*LaunchBox
 
 When using LaunchBox, playlists can be created by using the "Application/ROM Path" parameter - the filepaths/folder structure created by this script will allow you to be as granular as you would like.
 
