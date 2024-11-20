@@ -3,15 +3,15 @@ Written by machtendo, 2022-2024
 
 # What's this?
 
-Previously available as Windows Batch file, converted to PowerShell script for increased functionality.
-
-Not compatible with Linux or macOS currently.
-
 The aim of this script is to sort and organize ROM files by region, release type, and revision.
 
-This script creates a directory structure to accommodate for all the various release types and flags found in a No-Intro set, which is then replicated to folders for the four major release regions, then sorted appropriately. The script then checks the "Official Releases" folder of each region for titles with multiple revisions. It checks the revision numbers, leaves the latest revision in the "Official Releases" folder, and moves all earlier revisions of a given title to the "Previous Revisions" folder.
+This script creates a directory structure to accommodate for all the various release types and flags found in a No-Intro rom set, which is replicated to folders for the four major release regions, then sorted appropriately. The script then checks the "Official Releases" folder of each region for titles with multiple revisions. It checks the revision numbers, leaves the latest revision in the "Official Releases" folder, and moves all earlier revisions of a given title to the "Previous Revisions" folder.
 
 By default, this script creates full sets for each region - for example, (World) releases are actually COPIED to every region - I wanted to avoid regional biases where I could so that if someone wanted a full Japanese set or a European set, you only need run the script and grab the contents of the corresponding folder. You can disable this by commenting or removing the "Regional Bias" section found below.
+
+- Previously available as Windows Batch file, converted to PowerShell script for increased functionality.
+
+- Not compatible with Linux or macOS currently.
 
 # Why's this?
 
