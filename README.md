@@ -1,5 +1,5 @@
 # Machtendo No-Intro ROM Parsing
-Written by machjas, 2022-2023
+Written by machtendo, 2022-2024
 
 # What's this?
 
