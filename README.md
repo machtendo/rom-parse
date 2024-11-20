@@ -91,6 +91,8 @@ https://wiki.no-intro.org/index.php?title=Naming_Convention
 
 # Testing
 
+This script has been tested with the following platforms:
+
 - Atari - 2600
 - Atari - 5200
 - Atari - 7800
