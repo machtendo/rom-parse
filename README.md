@@ -39,12 +39,11 @@ That's it!
 
 # Logic & Structure
 
-# How have these files been sorted, and why?
-
+How have these files been sorted, and why?
 
 BIOS Files - BIOS files are first moved into a _BIOS folder prior to any sorting functionality. This is so that any available version is immediately and easily accessible for use with an emulator if needed.
 
-# Regions
+Regions
 
 I'm going by the three historically major release regions, with a fourth "Other" region to cover the other minor release regions.
 
@@ -54,7 +53,7 @@ Major Regions
 - Europe - Italy, Spain, Sweden, France, Germany, Australia, Denmark, Scandinavia
 - Other - Korea, Brazil, Argentina, Taiwan, Mexico, Russia, Hong Kong, Netherlands, China, Greece, Asia
 
-# No-Intro Flags
+No-Intro Flags
 
 The file structure for the No-Intro flags is replicated to the four regional folders above.
 
