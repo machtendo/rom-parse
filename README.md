@@ -1,4 +1,4 @@
-# Machtendo No-Intro ROM Parsing
+# No-Intro ROM Parsing
 Written by machtendo, 2022-2024
 
 # What's this?
