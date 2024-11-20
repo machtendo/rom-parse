@@ -15,6 +15,9 @@ By default, this script creates full sets for each region - for example, (World)
 
 In the future, I would like to create a GUI wrapper for this script, even if it's just so I can learn how.
 
+This project was originally released on LaunchBox Forums here: 
+https://forums.launchbox-app.com/files/file/4268-machtendo-no-intro-rom-parse/
+
 # Why's this?
 
 In order to simplify compatibility with various frontends, to satisfy my own preferences, and possibly the preferences of others. A few use-cases can be found below:
@@ -79,9 +82,7 @@ The file structure for the No-Intro flags is replicated to the four regional fol
 
 # Notes & Clarification
 
-Keep in mind, this script is only intended for use with romsets following the No-Intro naming convention. More information can be found here: 
-
-https://wiki.no-intro.org/index.php?title=Naming_Convention
+Keep in mind, this script is only intended for use with romsets following the No-Intro naming convention. More information can be found here: https://wiki.no-intro.org/index.php?title=Naming_Convention
 
 - This script is entirely filetype agnostic - it doesn't care about file extensions, so as long as the set of files you're applying this script to adheres to the No-Intro naming convention, this script can be used to sort them. One could also use this script to sort through artwork/image/media files for corresponding ROM files.
 
