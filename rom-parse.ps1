@@ -353,6 +353,7 @@ Move-Item -Path "*(*Sweden*)*.*" -Destination "Europe"
 Move-Item -Path "*(*France*)*.*" -Destination "Europe"
 Move-Item -Path "*(*Germany*)*.*" -Destination "Europe"
 Move-Item -Path "*(*Australia*)*.*" -Destination "Europe"
+Move-Item -Path "*(*New*Zealand*)*.*" -Destination "Europe"
 Move-Item -Path "*(*Denmark*)*.*" -Destination "Europe"
 Move-Item -Path "*(*Scandinavia*)*.*" -Destination "Europe"
 Move-Item -Path "*(*United*Kingdom*)*.*" -Destination "Europe"
@@ -372,6 +373,7 @@ Move-Item -Path "*(*Netherlands*)*.*" -Destination "Other"
 Move-Item -Path "*(*China*)*.*" -Destination "Other"
 Move-Item -Path "*(*Greece*)*.*" -Destination "Other"
 Move-Item -Path "*(*Asia*)*.*" -Destination "Other"
+Move-Item -Path "*(*Latin*America*)*.*" -Destination "Other"
 
 #################################
 # Parse Region: Unknown/Unspecified
