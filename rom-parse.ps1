@@ -395,6 +395,10 @@ Write-Host "Sorting North American Releases..."
 Move-Item -Path ".\North America\*Color hack*.*" -Destination ".\North America\Hacks\Enhanced Colors"
 Move-Item -Path ".\North America\*FastROM hack*.*" -Destination ".\North America\Hacks\FastROM"
 
+# Pre-Release
+
+Move-Item -Path ".\North America\*(*Beta*)*.*" -Destination ".\North America\Pre-Release\Beta"
+
 Move-Item -Path ".\North America\*(*Demo*)*.*" -Destination ".\North America\Pre-Release\Demo"
 Move-Item -Path ".\North America\*Sampler CD*.*" -Destination ".\North America\Pre-Release\Demo"
 Move-Item -Path ".\North America\*Sampler Disc*.*" -Destination ".\North America\Pre-Release\Demo"
@@ -424,9 +428,10 @@ Move-Item -Path ".\North America\PS-X-Change*.*" -Destination ".\North America\P
 Move-Item -Path ".\North America\PSone*.*" -Destination ".\North America\Pre-Release\Demo"
 Move-Item -Path ".\North America\Toys R Us - Attack of the Killer Demos*.*" -Destination ".\North America\Pre-Release\Demo"
 Move-Item -Path ".\North America\Toys R Us Test Drive Promotion*.*" -Destination ".\North America\Pre-Release\Demo"
-
 Move-Item -Path ".\North America\*(*Proto*)*.*" -Destination ".\North America\Pre-Release\Prototype"
-Move-Item -Path ".\North America\*(*Promo*)*.*" -Destination ".\North America\Alternate Releases"
+
+# Test Cartridges & Utilities
+
 Move-Item -Path ".\North America\*(*Program*)*.*" -Destination ".\North America\Test Cartridges & Utilities"
 Move-Item -Path ".\North America\*(*Enhancement*Chip*)*.*" -Destination ".\North America\Test Cartridges & Utilities"
 Move-Item -Path ".\North America\*(*Audio*Tapes*)*.*" -Destination ".\North America\Test Cartridges & Utilities"
@@ -469,7 +474,12 @@ Move-Item -Path ".\North America\Ultimate Codes for Use with*.*" -Destination ".
 Move-Item -Path ".\North America\Web Browser*.*" -Destination ".\North America\Test Cartridges & Utilities"
 Move-Item -Path ".\North America\XBAND*.*" -Destination ".\North America\Test Cartridges & Utilities"
 Move-Item -Path ".\North America\Game Boy Aging Cartridge*.*" -Destination ".\North America\Test Cartridges & Utilities"
+Move-Item -Path ".\North America\Atari 7800 Development Card (USA).*" -Destination ".\North America\Test Cartridges & Utilities"
+Move-Item -Path ".\North America\Super NES Control Deck Tester (USA)*.*" -Destination ".\North America\Test Cartridges & Utilities"
+Move-Item -Path ".\North America\World Class Service Super Nintendo Tester (USA).*" -Destination ".\North America\Test Cartridges & Utilities"
 
+# Alternate Releases
+Move-Item -Path ".\North America\*(*Promo*)*.*" -Destination ".\North America\Alternate Releases"
 Move-Item -Path ".\North America\*(*Arcade*)*.*" -Destination ".\North America\Alternate Releases"
 Move-Item -Path ".\North America\*(*Anthology*)*.*" -Destination ".\North America\Alternate Releases\Collections"
 Move-Item -Path ".\North America\*(*Capcom*Classics*Mini*Mix*)*.*" -Destination ".\North America\Alternate Releases\Collections"
@@ -485,11 +495,22 @@ Move-Item -Path ".\North America\*(*PC*Rerelease*)*.*" -Destination ".\North Ame
 Move-Item -Path ".\North America\*(*Sega*)*.*" -Destination ".\North America\Alternate Releases"
 Move-Item -Path ".\North America\*(*Switch*)*.*" -Destination ".\North America\Alternate Releases\Switch Online"
 Move-Item -Path ".\North America\*(*Virtual*Console)*.*" -Destination ".\North America\Alternate Releases\Virtual Console"
+Move-Item -Path ".\North America\*(*Retro-Bit*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*iam8bit*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*Capcom*Town*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*Limited Run Games*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*Steam*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*QUByte Classics*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*Piko Interactive*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(Strictly Limited Games)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(Evercade)*.*" -Destination ".\North America\Alternate Releases\"
 Move-Item -Path ".\North America\*(*Wii*)*.*" -Destination ".\North America\Alternate Releases"
 Move-Item -Path ".\North America\e-Reader (USA)*.*" -Destination ".\North America\Alternate Releases\eReader Edition"
 Move-Item -Path ".\North America\*(Alt)*.*" -Destination ".\North America\Alternate Releases\"
 Move-Item -Path ".\North America\*(*Alternate*)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(PROPER 12K)*.*" -Destination ".\North America\Alternate Releases\"
 
+# Alternate Releases - Multi-Cart
 Move-Item -Path ".\North America\2 Game Pack*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
 Move-Item -Path ".\North America\2 Games in 1*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
 Move-Item -Path ".\North America\2 Games in One*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
@@ -502,17 +523,59 @@ Move-Item -Path ".\North America\3 Games in One*.*" -Destination ".\North Americ
 Move-Item -Path ".\North America\4 Games on One Game Pak*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
 Move-Item -Path ".\North America\4 in 1 + 8 in 1*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
 
+# Alternate Releases - Manual Assignment
+Move-Item -Path ".\North America\Blitz! - Action Football (USA, Europe) (0F11CE0C).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Blitz! - Action Football (USA, Europe) (881B27C5).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Pole Position (USA) (A00ED3D6).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Pole Position (USA) (C10F37D8).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*[*Un-Worked Design by Supper*]*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Tecmo NBA Basketball (USA) (NES-N7).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Tecmo Super NBA Basketball (USA) (SNS-NA).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Wild Gunman (Japan, USA) (En).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Kirby's Adventure (Canada) (Fr).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Legend of Zelda, The - A Link to the Past (Canada) (Fr).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Alex Kidd in Miracle World (USA, Europe, Brazil) (En) (Rev 1).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Altered Beast (Japan, USA) (En) (Rev A).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Arcade Legends Sega Mega Drive (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Arcade Legends Sega Mega Drive ~ Arcade Legends Sega Genesis ~ Mega Drive Play TV (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Arcade Legends Street Fighter II' - Special Champion Edition (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Arcade Legends Street Fighter II' - Special Champion Edition ~ Mega Drive Play TV 3 (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\FZ Senki Axis ~ Final Zone (Japan, USA) (En).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Legend of Galahad, The ~ Galahad (USA, Europe).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Michael Jackson's Moonwalker (Japan, USA) (En).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\NHL '94 (USA, Europe) (Re-release).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\NHLPA Hockey 93 (USA, Europe) (EA Sports).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\PGA Tour Golf (USA) (HeartBeat Catalyst).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Raiden Densetsu ~ Raiden Trad (Japan, USA) (En).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Senjou no Ookami II ~ Mercs (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Sonic Compilation ~ Sonic Classics (USA, Europe, Korea) (En) (Rev A).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\Tatsujin ~ Truxton (World).*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\World Cup Soccer ~ World Championship Soccer (Japan, USA) (En) (Rev B).*" -Destination ".\North America\Alternate Releases\"
+
+# Previous Revisions - Manual Assignment
+Move-Item -Path ".\North America\Lost Vikings, The (USA) (November, 1993).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\Olympic Gold (Japan, USA) (En,Fr,De,Es,It,Nl,Pt,Sv).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\PGA Tour Golf (USA, Europe) (PGA07).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\Revenge of Shinobi, The (Japan, USA) (En).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\Super Monaco GP (Japan, USA) (En,Ja).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\Super Monaco GP (USA) (En,Ja).*" -Destination ".\North America\Previous Revisions"
+Move-Item -Path ".\North America\Tinhead (USA) (Ballistic) (April, 1994).*" -Destination ".\North America\Previous Revisions"
+
+# Hacked releases
 Move-Item -Path ".\North America\*(*Hack*)*.*" -Destination ".\North America\Hacks"
 
+# Unlicensed Releases
 Move-Item -Path ".\North America\*(*Unl*)*.*" -Destination ".\North America\Unlicensed Releases"
 
-Move-Item -Path ".\North America\*(*Beta*)*.*" -Destination ".\North America\Pre-Release\Beta"
+# Aftermarket Releases
+Move-Item -Path ".\North America\*(*Aftermarket*)*.*" -Destination ".\North America\Aftermarket Releases"
+Move-Item -Path ".\North America\*(*Pirate*)*.*" -Destination ".\North America\Aftermarket Releases"
 
+# Aftermarket Releases - Manual Assignment
 Move-Item -Path ".\North America\River City Girls Zero*.*" -Destination ".\North America\Aftermarket Releases"
 Move-Item -Path ".\North America\8-BIT ADV STEINS;GATE*.*" -Destination ".\North America\Aftermarket Releases"
-Move-Item -Path ".\North America\*(*Pirate*)*.*" -Destination ".\North America\Aftermarket Releases"
-Move-Item -Path ".\North America\*(*Aftermarket*)*.*" -Destination ".\North America\Aftermarket Releases"
 
+# Official Releases
 Move-Item -Path ".\North America\*.*" -Destination ".\North America\Official Releases"
 
 Write-Host "Sorting for North America Complete."
