@@ -487,6 +487,8 @@ Move-Item -Path ".\North America\*(*Switch*)*.*" -Destination ".\North America\A
 Move-Item -Path ".\North America\*(*Virtual*Console)*.*" -Destination ".\North America\Alternate Releases\Virtual Console"
 Move-Item -Path ".\North America\*(*Wii*)*.*" -Destination ".\North America\Alternate Releases"
 Move-Item -Path ".\North America\e-Reader (USA)*.*" -Destination ".\North America\Alternate Releases\eReader Edition"
+Move-Item -Path ".\North America\*(Alt)*.*" -Destination ".\North America\Alternate Releases\"
+Move-Item -Path ".\North America\*(*Alternate*)*.*" -Destination ".\North America\Alternate Releases\"
 
 Move-Item -Path ".\North America\2 Game Pack*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
 Move-Item -Path ".\North America\2 Games in 1*.*" -Destination ".\North America\Alternate Releases\Multi-Cart"
