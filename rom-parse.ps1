@@ -561,7 +561,7 @@ Move-Item -Path ".\North America\Super Monaco GP (Japan, USA) (En,Ja).*" -Destin
 Move-Item -Path ".\North America\Super Monaco GP (USA) (En,Ja).*" -Destination ".\North America\Previous Revisions"
 Move-Item -Path ".\North America\Tinhead (USA) (Ballistic) (April, 1994).*" -Destination ".\North America\Previous Revisions"
 
-# Hacked releases
+# Hacked Releases
 Move-Item -Path ".\North America\*(*Hack*)*.*" -Destination ".\North America\Hacks"
 
 # Unlicensed Releases
