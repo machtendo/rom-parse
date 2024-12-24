@@ -1185,36 +1185,42 @@ $destinationFolder = ".\North America\Previous Revisions"
 # Get all the files in the source folder
 $files = Get-ChildItem -Path $sourceFolder
 
-# Create a hashtable to store the highest revision for each filename along with its extension
+# Create a hashtable to store the highest revision or version for each filename along with its extension
 $highestRevisions = @{}
 
 # Loop through each file in the source folder
 foreach ($file in $files) {
     $filename = $file.BaseName  # Get the file name without extension
 
-    # Check if the filename matches the pattern ' (Rev #)' or ' (Rev A)' and extract the revision
-    if ($filename -match ' \(Rev ([A-Za-z0-9]+)\)') {
-        $currentRevision = $Matches[1]  # Store the revision as a string
+    $currentRevision = 0  # Default revision or version number
+    $isVersion = $false   # Track if it's a version number
 
-        $filename = $filename -replace ' \(Rev ([A-Za-z0-9]+)\)', ''  # Remove the revision from the filename
+    # Check if the filename matches the pattern ' (Rev #)' and extract the revision number
+    if ($filename -match ' \(Rev (\d+)\)') {
+        $currentRevision = [int]$Matches[1]  # Convert the revision number to an integer
+        $filename = $filename -replace ' \(Rev (\d+)\)', ''  # Remove the revision from the filename
     }
-    else {
-        $currentRevision = '0'  # Set the default revision to '0' for filenames without the ' (Rev #)' pattern
+    # Check if the filename matches the pattern ' (v#.#)' and extract the version number
+    elseif ($filename -match ' \(v(\d+\.\d+)\)') {
+        $currentRevision = [decimal]$Matches[1]  # Convert the version number to a decimal
+        $filename = $filename -replace ' \(v(\d+\.\d+)\)', ''  # Remove the version from the filename
+        $isVersion = $true  # Mark as version
     }
 
     $extension = $file.Extension  # Get the file extension
 
-    # Check if the current file has a higher revision than the stored highest revision for the filename
-    if (-not $highestRevisions.ContainsKey("$filename$extension") -or [string]$currentRevision -gt [string]$highestRevisions["$filename$extension"]["Revision"]) {
+    # Check if the current file has a higher revision or version than the stored highest for the filename
+    if (-not $highestRevisions.ContainsKey("$filename$extension") -or $currentRevision -gt $highestRevisions["$filename$extension"]["Revision"]) {
         $highestRevisions["$filename$extension"] = @{
             "Filename" = $filename
             "Revision" = $currentRevision
+            "IsVersion" = $isVersion
             "Extension" = $extension
         }
     }
 }
 
-# Remove duplicate entries with lower "Highest Revision" strings from the $highestRevisions hashtable
+# Remove duplicate entries with lower revisions or versions from the $highestRevisions hashtable
 $uniqueRevisions = @{}
 foreach ($fileData in $highestRevisions.Values) {
     $filename = $fileData["Filename"]
@@ -1223,7 +1229,7 @@ foreach ($fileData in $highestRevisions.Values) {
 
     if ($uniqueRevisions.ContainsKey("$filename$extension")) {
         $existingRevision = $uniqueRevisions["$filename$extension"]["Revision"]
-        if ([string]$revision -gt [string]$existingRevision) {
+        if ($revision -gt $existingRevision) {
             $uniqueRevisions["$filename$extension"] = @{
                 "Filename" = $filename
                 "Revision" = $revision
@@ -1240,48 +1246,41 @@ foreach ($fileData in $highestRevisions.Values) {
     }
 }
 
-# Set the path of the output text file
-$outputFilePath = Join-Path -Path $sourceFolder -ChildPath "ReassembledFilenames.txt"
+# Create a new hashtable to store the filenames generated in step 9
+$generatedFilenames = @{}
 
-# Create an array to store filenames listed in the output text file
-$listedFilenames = @()
-
-# Display the reassembled filenames and highest revisions, write them to the output text file,
-# and add them to the listedFilenames array
+# Display the reassembled filenames and highest revisions, and add them to the new hashtable
 foreach ($fileData in $uniqueRevisions.Values) {
     $filename = $fileData["Filename"]
     $revision = $fileData["Revision"]
+    $isVersion = $fileData["IsVersion"]
     $extension = $fileData["Extension"]
 
-    if ($revision -eq '0') {
+    if ($revision -eq 0) {
         $reassembledFilename = "$filename$extension"
+    }
+    elseif ($isVersion) {
+        $reassembledFilename = "$filename (v$revision)$extension"
     }
     else {
         $reassembledFilename = "$filename (Rev $revision)$extension"
     }
 
-    Write-Host "$filename, Highest Revision: $revision"
+    Write-Host "Filename: $reassembledFilename, Highest Revision/Version: $revision"
 
-    # Append the reassembled filename to the output text file
-    Add-Content -Path $outputFilePath -Value $reassembledFilename
-
-    # Add the reassembled filename to the listedFilenames array
-    $listedFilenames += $reassembledFilename
+    # Add the generated filename to the hashtable
+    $generatedFilenames["$filename$extension"] = $reassembledFilename
 }
 
-# Move files that are not listed in the output text file to the destination folder
+# Move files not found in the $generatedFilenames hashtable to the destination folder
 foreach ($file in $files) {
     $filename = $file.Name
-
-    if (-not $listedFilenames.Contains($filename)) {
+    if (-not $generatedFilenames.ContainsKey($filename)) {
         $destinationPath = Join-Path -Path $destinationFolder -ChildPath $filename
-        Move-Item -Path $file.FullName -Destination $destinationPath -Force
-        Write-Host "Moved $filename to $destinationPath"
+        Move-Item -Path $file.FullName -Destination $destinationPath
+        Write-Host "Moved file '$filename' to '$destinationPath'"
     }
 }
-
-# Delete the output text file
-Remove-Item -Path $outputFilePath -Force
 
 Write-Host "North American Revisions Parsed."
 
@@ -1298,36 +1297,42 @@ $destinationFolder = ".\Japan\Previous Revisions"
 # Get all the files in the source folder
 $files = Get-ChildItem -Path $sourceFolder
 
-# Create a hashtable to store the highest revision for each filename along with its extension
+# Create a hashtable to store the highest revision or version for each filename along with its extension
 $highestRevisions = @{}
 
 # Loop through each file in the source folder
 foreach ($file in $files) {
     $filename = $file.BaseName  # Get the file name without extension
 
-    # Check if the filename matches the pattern ' (Rev #)' or ' (Rev A)' and extract the revision
-    if ($filename -match ' \(Rev ([A-Za-z0-9]+)\)') {
-        $currentRevision = $Matches[1]  # Store the revision as a string
+    $currentRevision = 0  # Default revision or version number
+    $isVersion = $false   # Track if it's a version number
 
-        $filename = $filename -replace ' \(Rev ([A-Za-z0-9]+)\)', ''  # Remove the revision from the filename
+    # Check if the filename matches the pattern ' (Rev #)' and extract the revision number
+    if ($filename -match ' \(Rev (\d+)\)') {
+        $currentRevision = [int]$Matches[1]  # Convert the revision number to an integer
+        $filename = $filename -replace ' \(Rev (\d+)\)', ''  # Remove the revision from the filename
     }
-    else {
-        $currentRevision = '0'  # Set the default revision to '0' for filenames without the ' (Rev #)' pattern
+    # Check if the filename matches the pattern ' (v#.#)' and extract the version number
+    elseif ($filename -match ' \(v(\d+\.\d+)\)') {
+        $currentRevision = [decimal]$Matches[1]  # Convert the version number to a decimal
+        $filename = $filename -replace ' \(v(\d+\.\d+)\)', ''  # Remove the version from the filename
+        $isVersion = $true  # Mark as version
     }
 
     $extension = $file.Extension  # Get the file extension
 
-    # Check if the current file has a higher revision than the stored highest revision for the filename
-    if (-not $highestRevisions.ContainsKey("$filename$extension") -or [string]$currentRevision -gt [string]$highestRevisions["$filename$extension"]["Revision"]) {
+    # Check if the current file has a higher revision or version than the stored highest for the filename
+    if (-not $highestRevisions.ContainsKey("$filename$extension") -or $currentRevision -gt $highestRevisions["$filename$extension"]["Revision"]) {
         $highestRevisions["$filename$extension"] = @{
             "Filename" = $filename
             "Revision" = $currentRevision
+            "IsVersion" = $isVersion
             "Extension" = $extension
         }
     }
 }
 
-# Remove duplicate entries with lower "Highest Revision" strings from the $highestRevisions hashtable
+# Remove duplicate entries with lower revisions or versions from the $highestRevisions hashtable
 $uniqueRevisions = @{}
 foreach ($fileData in $highestRevisions.Values) {
     $filename = $fileData["Filename"]
@@ -1336,7 +1341,7 @@ foreach ($fileData in $highestRevisions.Values) {
 
     if ($uniqueRevisions.ContainsKey("$filename$extension")) {
         $existingRevision = $uniqueRevisions["$filename$extension"]["Revision"]
-        if ([string]$revision -gt [string]$existingRevision) {
+        if ($revision -gt $existingRevision) {
             $uniqueRevisions["$filename$extension"] = @{
                 "Filename" = $filename
                 "Revision" = $revision
@@ -1353,48 +1358,41 @@ foreach ($fileData in $highestRevisions.Values) {
     }
 }
 
-# Set the path of the output text file
-$outputFilePath = Join-Path -Path $sourceFolder -ChildPath "ReassembledFilenames.txt"
+# Create a new hashtable to store the filenames generated in step 9
+$generatedFilenames = @{}
 
-# Create an array to store filenames listed in the output text file
-$listedFilenames = @()
-
-# Display the reassembled filenames and highest revisions, write them to the output text file,
-# and add them to the listedFilenames array
+# Display the reassembled filenames and highest revisions, and add them to the new hashtable
 foreach ($fileData in $uniqueRevisions.Values) {
     $filename = $fileData["Filename"]
     $revision = $fileData["Revision"]
+    $isVersion = $fileData["IsVersion"]
     $extension = $fileData["Extension"]
 
-    if ($revision -eq '0') {
+    if ($revision -eq 0) {
         $reassembledFilename = "$filename$extension"
+    }
+    elseif ($isVersion) {
+        $reassembledFilename = "$filename (v$revision)$extension"
     }
     else {
         $reassembledFilename = "$filename (Rev $revision)$extension"
     }
 
-    Write-Host "$filename, Highest Revision: $revision"
+    Write-Host "Filename: $reassembledFilename, Highest Revision/Version: $revision"
 
-    # Append the reassembled filename to the output text file
-    Add-Content -Path $outputFilePath -Value $reassembledFilename
-
-    # Add the reassembled filename to the listedFilenames array
-    $listedFilenames += $reassembledFilename
+    # Add the generated filename to the hashtable
+    $generatedFilenames["$filename$extension"] = $reassembledFilename
 }
 
-# Move files that are not listed in the output text file to the destination folder
+# Move files not found in the $generatedFilenames hashtable to the destination folder
 foreach ($file in $files) {
     $filename = $file.Name
-
-    if (-not $listedFilenames.Contains($filename)) {
+    if (-not $generatedFilenames.ContainsKey($filename)) {
         $destinationPath = Join-Path -Path $destinationFolder -ChildPath $filename
-        Move-Item -Path $file.FullName -Destination $destinationPath -Force
-        Write-Host "Moved $filename to $destinationPath"
+        Move-Item -Path $file.FullName -Destination $destinationPath
+        Write-Host "Moved file '$filename' to '$destinationPath'"
     }
 }
-
-# Delete the output text file
-Remove-Item -Path $outputFilePath -Force
 
 Write-Host "Japanese Revisions Parsed."
 
@@ -1411,36 +1409,42 @@ $destinationFolder = ".\Europe\Previous Revisions"
 # Get all the files in the source folder
 $files = Get-ChildItem -Path $sourceFolder
 
-# Create a hashtable to store the highest revision for each filename along with its extension
+# Create a hashtable to store the highest revision or version for each filename along with its extension
 $highestRevisions = @{}
 
 # Loop through each file in the source folder
 foreach ($file in $files) {
     $filename = $file.BaseName  # Get the file name without extension
 
-    # Check if the filename matches the pattern ' (Rev #)' or ' (Rev A)' and extract the revision
-    if ($filename -match ' \(Rev ([A-Za-z0-9]+)\)') {
-        $currentRevision = $Matches[1]  # Store the revision as a string
+    $currentRevision = 0  # Default revision or version number
+    $isVersion = $false   # Track if it's a version number
 
-        $filename = $filename -replace ' \(Rev ([A-Za-z0-9]+)\)', ''  # Remove the revision from the filename
+    # Check if the filename matches the pattern ' (Rev #)' and extract the revision number
+    if ($filename -match ' \(Rev (\d+)\)') {
+        $currentRevision = [int]$Matches[1]  # Convert the revision number to an integer
+        $filename = $filename -replace ' \(Rev (\d+)\)', ''  # Remove the revision from the filename
     }
-    else {
-        $currentRevision = '0'  # Set the default revision to '0' for filenames without the ' (Rev #)' pattern
+    # Check if the filename matches the pattern ' (v#.#)' and extract the version number
+    elseif ($filename -match ' \(v(\d+\.\d+)\)') {
+        $currentRevision = [decimal]$Matches[1]  # Convert the version number to a decimal
+        $filename = $filename -replace ' \(v(\d+\.\d+)\)', ''  # Remove the version from the filename
+        $isVersion = $true  # Mark as version
     }
 
     $extension = $file.Extension  # Get the file extension
 
-    # Check if the current file has a higher revision than the stored highest revision for the filename
-    if (-not $highestRevisions.ContainsKey("$filename$extension") -or [string]$currentRevision -gt [string]$highestRevisions["$filename$extension"]["Revision"]) {
+    # Check if the current file has a higher revision or version than the stored highest for the filename
+    if (-not $highestRevisions.ContainsKey("$filename$extension") -or $currentRevision -gt $highestRevisions["$filename$extension"]["Revision"]) {
         $highestRevisions["$filename$extension"] = @{
             "Filename" = $filename
             "Revision" = $currentRevision
+            "IsVersion" = $isVersion
             "Extension" = $extension
         }
     }
 }
 
-# Remove duplicate entries with lower "Highest Revision" strings from the $highestRevisions hashtable
+# Remove duplicate entries with lower revisions or versions from the $highestRevisions hashtable
 $uniqueRevisions = @{}
 foreach ($fileData in $highestRevisions.Values) {
     $filename = $fileData["Filename"]
@@ -1449,7 +1453,7 @@ foreach ($fileData in $highestRevisions.Values) {
 
     if ($uniqueRevisions.ContainsKey("$filename$extension")) {
         $existingRevision = $uniqueRevisions["$filename$extension"]["Revision"]
-        if ([string]$revision -gt [string]$existingRevision) {
+        if ($revision -gt $existingRevision) {
             $uniqueRevisions["$filename$extension"] = @{
                 "Filename" = $filename
                 "Revision" = $revision
@@ -1466,48 +1470,41 @@ foreach ($fileData in $highestRevisions.Values) {
     }
 }
 
-# Set the path of the output text file
-$outputFilePath = Join-Path -Path $sourceFolder -ChildPath "ReassembledFilenames.txt"
+# Create a new hashtable to store the filenames generated in step 9
+$generatedFilenames = @{}
 
-# Create an array to store filenames listed in the output text file
-$listedFilenames = @()
-
-# Display the reassembled filenames and highest revisions, write them to the output text file,
-# and add them to the listedFilenames array
+# Display the reassembled filenames and highest revisions, and add them to the new hashtable
 foreach ($fileData in $uniqueRevisions.Values) {
     $filename = $fileData["Filename"]
     $revision = $fileData["Revision"]
+    $isVersion = $fileData["IsVersion"]
     $extension = $fileData["Extension"]
 
-    if ($revision -eq '0') {
+    if ($revision -eq 0) {
         $reassembledFilename = "$filename$extension"
+    }
+    elseif ($isVersion) {
+        $reassembledFilename = "$filename (v$revision)$extension"
     }
     else {
         $reassembledFilename = "$filename (Rev $revision)$extension"
     }
 
-    Write-Host "$filename, Highest Revision: $revision"
+    Write-Host "Filename: $reassembledFilename, Highest Revision/Version: $revision"
 
-    # Append the reassembled filename to the output text file
-    Add-Content -Path $outputFilePath -Value $reassembledFilename
-
-    # Add the reassembled filename to the listedFilenames array
-    $listedFilenames += $reassembledFilename
+    # Add the generated filename to the hashtable
+    $generatedFilenames["$filename$extension"] = $reassembledFilename
 }
 
-# Move files that are not listed in the output text file to the destination folder
+# Move files not found in the $generatedFilenames hashtable to the destination folder
 foreach ($file in $files) {
     $filename = $file.Name
-
-    if (-not $listedFilenames.Contains($filename)) {
+    if (-not $generatedFilenames.ContainsKey($filename)) {
         $destinationPath = Join-Path -Path $destinationFolder -ChildPath $filename
-        Move-Item -Path $file.FullName -Destination $destinationPath -Force
-        Write-Host "Moved $filename to $destinationPath"
+        Move-Item -Path $file.FullName -Destination $destinationPath
+        Write-Host "Moved file '$filename' to '$destinationPath'"
     }
 }
-
-# Delete the output text file
-Remove-Item -Path $outputFilePath -Force
 
 Write-Host "European Revisions Parsed."
 
@@ -1524,36 +1521,42 @@ $destinationFolder = ".\Other\Previous Revisions"
 # Get all the files in the source folder
 $files = Get-ChildItem -Path $sourceFolder
 
-# Create a hashtable to store the highest revision for each filename along with its extension
+# Create a hashtable to store the highest revision or version for each filename along with its extension
 $highestRevisions = @{}
 
 # Loop through each file in the source folder
 foreach ($file in $files) {
     $filename = $file.BaseName  # Get the file name without extension
 
-    # Check if the filename matches the pattern ' (Rev #)' or ' (Rev A)' and extract the revision
-    if ($filename -match ' \(Rev ([A-Za-z0-9]+)\)') {
-        $currentRevision = $Matches[1]  # Store the revision as a string
+    $currentRevision = 0  # Default revision or version number
+    $isVersion = $false   # Track if it's a version number
 
-        $filename = $filename -replace ' \(Rev ([A-Za-z0-9]+)\)', ''  # Remove the revision from the filename
+    # Check if the filename matches the pattern ' (Rev #)' and extract the revision number
+    if ($filename -match ' \(Rev (\d+)\)') {
+        $currentRevision = [int]$Matches[1]  # Convert the revision number to an integer
+        $filename = $filename -replace ' \(Rev (\d+)\)', ''  # Remove the revision from the filename
     }
-    else {
-        $currentRevision = '0'  # Set the default revision to '0' for filenames without the ' (Rev #)' pattern
+    # Check if the filename matches the pattern ' (v#.#)' and extract the version number
+    elseif ($filename -match ' \(v(\d+\.\d+)\)') {
+        $currentRevision = [decimal]$Matches[1]  # Convert the version number to a decimal
+        $filename = $filename -replace ' \(v(\d+\.\d+)\)', ''  # Remove the version from the filename
+        $isVersion = $true  # Mark as version
     }
 
     $extension = $file.Extension  # Get the file extension
 
-    # Check if the current file has a higher revision than the stored highest revision for the filename
-    if (-not $highestRevisions.ContainsKey("$filename$extension") -or [string]$currentRevision -gt [string]$highestRevisions["$filename$extension"]["Revision"]) {
+    # Check if the current file has a higher revision or version than the stored highest for the filename
+    if (-not $highestRevisions.ContainsKey("$filename$extension") -or $currentRevision -gt $highestRevisions["$filename$extension"]["Revision"]) {
         $highestRevisions["$filename$extension"] = @{
             "Filename" = $filename
             "Revision" = $currentRevision
+            "IsVersion" = $isVersion
             "Extension" = $extension
         }
     }
 }
 
-# Remove duplicate entries with lower "Highest Revision" strings from the $highestRevisions hashtable
+# Remove duplicate entries with lower revisions or versions from the $highestRevisions hashtable
 $uniqueRevisions = @{}
 foreach ($fileData in $highestRevisions.Values) {
     $filename = $fileData["Filename"]
@@ -1562,7 +1565,7 @@ foreach ($fileData in $highestRevisions.Values) {
 
     if ($uniqueRevisions.ContainsKey("$filename$extension")) {
         $existingRevision = $uniqueRevisions["$filename$extension"]["Revision"]
-        if ([string]$revision -gt [string]$existingRevision) {
+        if ($revision -gt $existingRevision) {
             $uniqueRevisions["$filename$extension"] = @{
                 "Filename" = $filename
                 "Revision" = $revision
@@ -1579,43 +1582,39 @@ foreach ($fileData in $highestRevisions.Values) {
     }
 }
 
-# Set the path of the output text file
-$outputFilePath = Join-Path -Path $sourceFolder -ChildPath "ReassembledFilenames.txt"
+# Create a new hashtable to store the filenames generated in step 9
+$generatedFilenames = @{}
 
-# Create an array to store filenames listed in the output text file
-$listedFilenames = @()
-
-# Display the reassembled filenames and highest revisions, write them to the output text file,
-# and add them to the listedFilenames array
+# Display the reassembled filenames and highest revisions, and add them to the new hashtable
 foreach ($fileData in $uniqueRevisions.Values) {
     $filename = $fileData["Filename"]
     $revision = $fileData["Revision"]
+    $isVersion = $fileData["IsVersion"]
     $extension = $fileData["Extension"]
 
-    if ($revision -eq '0') {
+    if ($revision -eq 0) {
         $reassembledFilename = "$filename$extension"
+    }
+    elseif ($isVersion) {
+        $reassembledFilename = "$filename (v$revision)$extension"
     }
     else {
         $reassembledFilename = "$filename (Rev $revision)$extension"
     }
 
-    Write-Host "$filename, Highest Revision: $revision"
+    Write-Host "Filename: $reassembledFilename, Highest Revision/Version: $revision"
 
-    # Append the reassembled filename to the output text file
-    Add-Content -Path $outputFilePath -Value $reassembledFilename
-
-    # Add the reassembled filename to the listedFilenames array
-    $listedFilenames += $reassembledFilename
+    # Add the generated filename to the hashtable
+    $generatedFilenames["$filename$extension"] = $reassembledFilename
 }
 
-# Move files that are not listed in the output text file to the destination folder
+# Move files not found in the $generatedFilenames hashtable to the destination folder
 foreach ($file in $files) {
     $filename = $file.Name
-
-    if (-not $listedFilenames.Contains($filename)) {
+    if (-not $generatedFilenames.ContainsKey($filename)) {
         $destinationPath = Join-Path -Path $destinationFolder -ChildPath $filename
-        Move-Item -Path $file.FullName -Destination $destinationPath -Force
-        Write-Host "Moved $filename to $destinationPath"
+        Move-Item -Path $file.FullName -Destination $destinationPath
+        Write-Host "Moved file '$filename' to '$destinationPath'"
     }
 }
 
